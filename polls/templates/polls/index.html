@@ -1,0 +1,19 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:new_album'%}" method="post">
+    {% csrf_token %}
+    <label for="album_uri">Add a new Muspolic by entering an album URI (spotfy): </label>
+    <input id="album_uri" type="text" name="album_uri" value="">
+    <input type="submit" value="OK">
+</form>
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.album_name }} - {{ question.artist_name }}</a></li>
+        <img src={{question.album_url}} />
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
