@@ -1,9 +1,52 @@
-<h1>{{ question.question_text }}</h1>
+{%extends "pages/list_quest.html" %}
 
+{% block head_content %}
+
+{% if user.is_authenticated %}
+
+{% if error_message %}
+<h1><strong>{{ error_message }}</strong></h1>
+<a href="{% url 'polls:index'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Muspolic it</a>
+{% else %}
+
+<h1>{{ question.album_name }}</h1>
+<h1>VOTES</h1>
+<a href="{% url 'polls:index'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Muspolic it</a>
+{% endif %}
+
+{% else %}
+
+    {% csrf_token %}
+    <h1 class="masthead-heading mb-0">For those about to rock, we salute you</h1>
+    <a href="{% url 'login'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Log in</a>
+
+{% endif %}
+
+{% endblock %}
+
+{% block section_content %}
 <ul>
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+                <img class="img-fluid rounded-circle" src={{question.album_url}} alt="">
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+                <h1>{{ choice.choice_text }} </h1>
+                <h2> {{ choice.votes }} vote{{ choice.votes|pluralize }} </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <li></li>
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+{% endblock %}

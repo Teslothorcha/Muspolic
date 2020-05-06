@@ -1,19 +1,76 @@
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{%extends "pages/list_quest.html" %}
+
+{% block head_content %}
+
+{% if user.is_authenticated %}
+
+{% if error_message %}<h2><strong>{{ error_message }}</strong></h2>{% endif %}
 
 <form action="{% url 'polls:new_album'%}" method="post">
     {% csrf_token %}
-    <label for="album_uri">Add a new Muspolic by entering an album URI (spotfy): </label>
+    <h1 class="masthead-heading mb-0">Add a new Muspolic</h1>
+    <label for="album_uri"> Enter Spotify album's URI: </label>
     <input id="album_uri" type="text" name="album_uri" value="">
     <input type="submit" value="OK">
 </form>
 
+{% else %}
+
+    {% csrf_token %}
+    <h1 class="masthead-heading mb-0">For those about to rock, we salute you</h1>
+    <a href="{% url 'login'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Log in</a>
+
+{% endif %}
+{% endblock %}
+
+
+
+{% block section_content %}
+
 {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.album_name }} - {{ question.artist_name }}</a></li>
-        <img src={{question.album_url}} />
-        {% endfor %}
-    </ul>
+
+{% for question in latest_question_list %}
+
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <img class="img-fluid rounded-circle" src={{question.album_url}} alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4"><a href="{% url 'polls:detail' question.id %}">{{ question.album_name }}</a></h2>
+                    <p>{{ question.artist_name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src={{question.album_url}} alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+                <h2 class="display-4"><a href="{% url 'polls:detail' question.id %}">{{ question.album_name }}</a></h2>
+                <p>{{ question.artist_name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+
+{% endfor %}
+
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+{% endblock %}

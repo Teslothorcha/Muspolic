@@ -1,12 +1,60 @@
+{%extends "pages/list_quest.html" %}
+
+{% block head_content %}
+{% if user.is_authenticated %}
+<link rel="stylesheet" type="text/css" href="details.css">
+<h1>{{ question.artist_name }}</h1>
 <h1>{{ question.question_text }}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+
+{% else %}
+
+    {% csrf_token %}
+    <h1 class="masthead-heading mb-0">For those about to rock, we salute you</h1>
+    <a href="{% url 'login'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Log in</a>
+
+{% endif %}
+{% endblock %}
+
+
+{% block section_content %}
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                    <img class="img-fluid rounded-circle" src={{question.album_url}} alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h1><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endfor %}
-<input type="submit" value="Vote">
+
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+                <input type="submit" value="Vote">
+            </div>
+        </div>
+    </div>
+</div>
+
 </form>
+{% endblock %}

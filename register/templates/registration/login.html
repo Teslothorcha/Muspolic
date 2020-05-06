@@ -1,0 +1,33 @@
+{% extends "pages/base_log.html" %}
+{% load static %}
+
+{% block title %} Create an account {% endblock %}
+
+{% block head_content %}
+
+    <h1>LOG IN</h1>
+
+{% endblock %}
+
+{% block section_content %}
+
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+                <img class="img-fluid rounded-circle" src="{% static 'pages/Muspolic.png' %}" >
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+                <form method="POST" class="form-group">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-success">LOG IN</button>
+                </form>                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
