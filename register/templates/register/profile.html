@@ -6,7 +6,7 @@
 
     <h1>{{ name_user }}</h1>
     <p>{{ image_message }}</p>
-    <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Muspolic it</a>
+    <a href="{% url 'polls:index'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Muspolic it</a>
 {% endblock %}
 
 {% block section_content %}
@@ -15,7 +15,7 @@
     <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-                <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ creator.user_image.url }}" >
+                <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ user.profile.user_image.url }}" >
             </div>
         </div>
         <div class="col-lg-6 order-lg-1">
@@ -30,6 +30,7 @@
     </div>
 </div>
 
+{% if latest_question_list %}
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
@@ -44,6 +45,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% for question in latest_question_list %}
 

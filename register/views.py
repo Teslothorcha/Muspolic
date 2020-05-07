@@ -23,6 +23,8 @@ def create_account(request):
 
 def profile_page(request):
     latest_question_list = Question.objects.filter(creator=request.user.username)
+    if len(latest_question_list) == 0:
+        latest_question_list = None
     user_profile = Profile.objects.get(user_id=request.user.id)
     form_im = ProfileForm(instance=user_profile)
     return render(request, "register/profile.html", 

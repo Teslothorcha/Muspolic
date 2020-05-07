@@ -53,7 +53,7 @@
       <div class="container">
         <h1 class="masthead-heading mb-0">Start to Muspolic </h1>
         <h2 class="masthead-subheading mb-0">your Favorite Albums</h2>
-        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Muspolic it</a>
+        <a href="{% url 'register:create_account'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Sign in</a>
       </div>
     </div>
 
@@ -71,6 +71,7 @@
           <div class="p-5">
             <h2 class="display-4">Create an account</h2>
             <p>Log in to musplic all the albums that you want with thw whole world, share and discover music everyday.</p>
+            <a href="{% url 'register:create_account'%}" class="btn btn-primary btn-xl rounded-pill mt-5">Register</a>
           </div>
         </div>
       </div>
