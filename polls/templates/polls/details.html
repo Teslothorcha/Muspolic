@@ -20,6 +20,24 @@
 
 
 {% block section_content %}
+
+
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ creator.user_image.url }}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-5">
+            <h1>{{ creator.user.username }}'s Muspolic </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
@@ -39,6 +57,7 @@
             </div>
         </div>
     </div>
+
 {% endfor %}
 
 

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .credentials import g_app_email, g_app_pass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -130,3 +131,12 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/polls/'
 LOGOUT_REDIRECT_URL = '/pages/'
+
+  
+EMAIL_BACKENDS = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = g_app_email
+EMAIL_HOST_PASSWORD = g_app_pass
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  

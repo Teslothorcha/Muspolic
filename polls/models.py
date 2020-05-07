@@ -34,4 +34,6 @@ class Voter(models.Model):
     def __str__(self):
         return self.voter_name
 
+
+
     

@@ -10,26 +10,20 @@
 {% endblock %}
 
 {% block section_content %}
-
+{% load crispy_forms_tags %}
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-                <img class="img-fluid rounded-circle" src="{{ user.profile.user_image.url }}" >
+                <img class="img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ creator.user_image.url }}" >
             </div>
         </div>
         <div class="col-lg-6 order-lg-1">
             <div class="p-5">
                 <form name = "form" enctype = "multipart/form-data" action ="{% url 'register:profile_image' name_user %}" method ="post" >
                 {% csrf_token %}
-                <br>
-         
-                <div style = "max-width:470px;">
-                   
-                      <input type = "file" style = "margin-left:20%;" placeholder = "Picture" name = "user_image" />
-                   
-                </div>
-                <button type="submit" class="btn btn-success">Register</button>
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Change profile picture</button>
                 </form>                
             </div>
         </div>

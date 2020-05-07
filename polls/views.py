@@ -4,7 +4,10 @@ from .models import Question, Choice, Voter
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth import authenticate
+from register.models import Profile
+from django.contrib.auth.models import User
 
+from muspolic.credentials import  sp_client_st, sp_clinet_id, sp_redirect_uri
 # import python os
 import os
 
@@ -31,6 +34,21 @@ class DetailView(generic.DetailView):
     template_name = 'polls/details.html'
 
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        #get the object of the question
+        question_of_user = Question.objects.filter(id=self.kwargs['pk']).first()
+        #get the creator's name of that song
+        creator_question = question_of_user.creator
+        # get id of the creator's song
+        id_creator = User.objects.filter(username=creator_question).first()
+        # send creators profile to show his picture
+        context['creator'] = Profile.objects.get(user=id_creator)
+        return context
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
@@ -47,7 +65,7 @@ def vote(request, question_id):
                 'error_message': "You didn't select a choice.",
             })
         else:
-            has_voted = Voter.objects.filter(voter_name=request.user.username)
+            has_voted = Voter.objects.filter(question=question_id).filter(voter_name=request.user.username)
             if len(has_voted) == 0:
                 #add user as voter for this album
                 Voter.objects.create(question_id=question.id, voter_name=request.user.username)
@@ -67,9 +85,9 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('pages:home_view'))
 
 def new_album(request):
-    os.environ['SPOTIPY_CLIENT_ID'] = "5071577af77f4d67bf0deba899b7c7e3"
-    os.environ['SPOTIPY_CLIENT_SECRET'] = "091b14181b9d45ada442ee6122dc2af7"
-    os.environ['SPOTIPY_REDIRECT_URI'] = "http://127.0.0.1:8000/polls/"
+    os.environ['SPOTIPY_CLIENT_ID'] = sp_clinet_id
+    os.environ['SPOTIPY_CLIENT_SECRET'] = sp_client_st
+    os.environ['SPOTIPY_REDIRECT_URI'] = sp_redirect_uri
 
     latest_question_list = Question.objects.order_by('-pub_date')[:10]
 
