@@ -26,13 +26,14 @@ SECRET_KEY = '58_=hn@qlt0856m3t@4!iyx44%rbmn7xcgs28p-$#hg)l=zupc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'handler.apps.HandlerConfig',
     'register.apps.RegisterConfig',
     'pages.apps.PagesConfig',
     'polls.apps.PollsConfig',
@@ -56,10 +57,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'muspolic.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
