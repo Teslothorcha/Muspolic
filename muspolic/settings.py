@@ -26,7 +26,7 @@ SECRET_KEY = '58_=hn@qlt0856m3t@4!iyx44%rbmn7xcgs28p-$#hg)l=zupc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['teslothorcha.tech' ,'157.245.116.103', 'localholst']
+ALLOWED_HOSTS = ['www.teslothorcha.tech', 'teslothorcha.tech' ,'157.245.116.103', 'localholst']
 
 
 # Application definition
