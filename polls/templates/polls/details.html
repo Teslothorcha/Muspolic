@@ -46,13 +46,14 @@
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2">
                 <div class="p-5">
-                    <img class="img-fluid rounded-circle" src={{question.album_url}} alt="">
+                    <img class="img-fluid rounded-circle" src={{question.album_url}}  width="100" height="100">
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
                     <h1><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br></h1>
+                    <p>  Votes: {{ choice.choice_text }}</p>
                 </div>
             </div>
         </div>
