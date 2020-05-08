@@ -95,7 +95,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'OPTIONS': {
-                'read_default_file': '/etc/mysql/my.cnf',
+                'read_default_file': '/etc/my.cnf',
             },
         }
 }
