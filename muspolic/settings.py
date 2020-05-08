@@ -94,8 +94,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'OPTIONS': {
-                'read_default_file': '/etc/mysql/my.cnf',
+            'NAME': 'muspolic',
+            'USER': 'mus_master',
+            'PASSWORD': 'Mmcpm2020-1',
+            'HOST': 'localhost',
+            'PORT': '',
             },
         }
 }
