@@ -1,7 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+# home page
 
 def home_view(request):
+    """
+    sets home view for muspolic
+    """
     return render(request, 'pages/index.html')
 

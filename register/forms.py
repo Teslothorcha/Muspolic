@@ -4,12 +4,19 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class ProfileForm(forms.ModelForm): 
+    """
+    Extends standar user profile 
+    to add user picture
+    """
   
     class Meta: 
         model = Profile 
         fields = ['user_image']
 
 class RegisterForm(UserCreationForm):
+    """
+    Extends standard form to add Email
+    """
     email = forms.EmailField(required=True)
 
     class Meta:

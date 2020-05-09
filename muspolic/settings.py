@@ -29,8 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['www.teslothorcha.tech', 'teslothorcha.tech' ,'157.245.116.103', 'localholst']
 
 
-# Application definition
-
+# all application needed to run the project
 INSTALLED_APPS = [
     'crispy_forms',
     'handler.apps.HandlerConfig',
@@ -81,13 +80,12 @@ WSGI_APPLICATION = 'muspolic.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#if project is on dev-env set basic sqlite3 database, if on prod-env set mysql database connection
 if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'OPTIONS': {
-                'read_default_file': '/etc/my.cnf',
-            },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase',
         }
     }
 else:
@@ -98,7 +96,7 @@ else:
                 'read_default_file': '/etc/mysql/my.cnf',
             },
         }
-}
+    }
 
 
 # Password validation
@@ -146,6 +144,7 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/polls/'
 LOGOUT_REDIRECT_URL = '/pages/'
 
+#set up to send emails through gmail personal account
   
 EMAIL_BACKENDS = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
