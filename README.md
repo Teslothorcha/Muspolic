@@ -48,11 +48,11 @@ Now you will to change is on the project is the environment. Django allows two k
 >----------settings.py
 
 You will need to set DEBUG = True, meaning that you will run it on development so Django can tell you about errors and is easier to debug. By setting this variable value to "True" you are also activating a conditional for the DATABASES variable located in this same file. This will activate SQLite an embedded database software for local/client storage. With those changes being made you are missing only one last thing, to create a file called credentials.py inside muspolic folder with the following variables.
->g_app_email = 'the email used to password recovery process'
->g_app_pass = 'google's password for app use (if you chose gmail above)'
->sp_clinet_id = "your Spotify client app id"
->sp_client_st = "Your Sporify client app secret"
->sp_redirect_uri = "http://127.0.0.1:8000/polls/"
+><p>g_app_email = 'the email used to password recovery process'</p>
+><p>g_app_pass = 'google's password for app use (if you chose gmail above)'</p>
+><p>sp_clinet_id = "your Spotify client app id"</p>
+><p>sp_client_st = "Your Sporify client app secret"</p>
+><p>sp_redirect_uri = "http://127.0.0.1:8000/polls/"</p>
 
 In these links you can create your spotify own app credentials and google app password
 - https://developer.spotify.com/dashboard/
